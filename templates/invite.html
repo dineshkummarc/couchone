@@ -1,0 +1,65 @@
+{{>header}}
+      <div id="flash"></div>
+      <p>To become a hosting beta-tester, fill out this form, and you'll be directed to your very own instance of <a href="http://couchdb.apache.org">Apache CouchDB</a>.</p>
+      <form>
+        <p>Dear Couchios,</p>
+        <p>
+          Please set up an <a href="http://couchdb.apache.org">Apache CouchDB</a> server for me, hosted at the address 
+          <tt><input class="init" type="text" name="subdomain" value="mycouch">.couchone.com</tt>. 
+          To contact me about my service, please email 
+          <input type="text" name="email" value="{{invite_email}}" size="{{email_length}}">.
+        </p>
+        <p>
+          <input type="submit" value="Thank you.">
+        </p>
+      </form>
+
+      {{>footer}}
+
+  </body>
+  <script src="/_utils/script/json2.js"></script>
+  <script src="/_utils/script/jquery.js"></script>
+  <script src="/_utils/script/jquery.couch.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      var error = function(resp) {
+        if (resp.reason) {
+          $("#flash").text("Error: "+resp.reason);
+        } else {
+          $("#flash").text("Oops, something went wrong. We are terribly sorry! Please contact hosting@couch.io with details.");         
+        }
+      };
+      
+      $("input.init").click(function() {
+        var input = $(this);
+        input.val("");
+        input.removeClass("init");
+      });
+      $("form").submit(function() {
+        var form = this;
+        var id = document.location.href.split("/").pop();
+        var db = $.couch.db("couchone");
+        db.openDoc(id, {
+          success : function(doc) {
+            var subdomain = $("input[name=subdomain]").val();
+            if (subdomain == "mycouch") {
+              $("#flash").text("You need to set the subdomain first.")
+            } else {
+              doc.subdomain = subdomain;
+              doc.signup_email = $("input[name=email]").val();
+              doc.state = "rsvp";
+              db.saveDoc(doc, {
+                error : error,
+                success : function() {
+                  $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");
+                }
+              });
+            }
+          },
+          error : error
+        })
+        return false;
+      });
+    });
+  </script>
+</html>

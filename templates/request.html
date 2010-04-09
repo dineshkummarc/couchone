@@ -1,0 +1,62 @@
+{{>header}}
+      <div id="flash"></div>
+      <p>To become a hosting beta-tester, fill out this form to request an invite code. We'll release more invite codes as capacity becomes available.</p>
+      <form>
+        <p>Dear Couchios,</p>
+        <p>
+          I'd like to try your hosted <a href="http://couchdb.apache.org">Apache CouchDB</a> service! Please email 
+          an invite code to me at
+          <input class="init" type="text" name="email" value="mymail@example.com">. 
+        </p>
+        <p>          
+          I'd also like to leave an (optional) message:
+          <textarea name="message" rows="6" cols="40"></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Thanks!">
+        </p>
+      </form>
+
+      {{>footer}}
+
+  </body>
+  <script src="/_utils/script/json2.js"></script>
+  <script src="/_utils/script/jquery.js"></script>
+  <script src="/_utils/script/jquery.couch.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      var error = function(resp) {
+        if (resp.reason) {
+          $("#flash").text("Error: "+resp.reason);
+        } else {
+          $("#flash").text("Oops, something went wrong. We are terribly sorry! Please contact hosting@couch.io with details.");         
+        }
+      };
+      
+      $("input.init").click(function() {
+        var input = $(this);
+        input.val("");
+        input.removeClass("init");
+      });
+      
+      $("form").submit(function() {
+        var form = this;
+        var db = $.couch.db("couchone");
+
+        db.saveDoc({
+          type : "invite",
+          state : "request",
+          invite_email : $("input[name=email]").val(),
+          user_message : $("textarea").val()
+        }, {
+          error : error,
+          success : function() {
+            $(form).html("Your invite request has been recieved and will be processed as soon as possible. Thank you!");
+          }
+        });
+
+        return false;
+      });
+    });
+  </script>
+</html>

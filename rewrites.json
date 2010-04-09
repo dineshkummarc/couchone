@@ -1,0 +1,34 @@
+[
+  {
+    "from": "favicon.ico",
+    "to": "images/favicon.ico"
+  },
+  {
+    "from": "style/*",
+    "to": "style/*"
+  },
+  {
+    "from": "images/*",
+    "to": "images/*"
+  },
+  {
+    "from": "vendor/*",
+    "to": "vendor/*"
+  },
+  {
+    "from": "/",
+    "to": "_show/invite"
+  },
+  {
+    "from": "invite",
+    "to": "_show/invite"
+  },
+  {
+    "from": "invite/:code",
+    "to": "_show/invite/:code"
+  },
+  {
+    "from": "/*",
+    "to": "../../../*"
+  }
+]
