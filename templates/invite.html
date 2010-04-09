@@ -39,25 +39,34 @@
         var form = this;
         var id = document.location.href.split("/").pop();
         var db = $.couch.db("couchone");
-        db.openDoc(id, {
-          success : function(doc) {
-            var subdomain = $("input[name=subdomain]").val();
-            if (subdomain == "mycouch") {
-              $("#flash").text("You need to set the subdomain first.")
-            } else {
-              doc.subdomain = subdomain;
-              doc.signup_email = $("input[name=email]").val();
-              doc.state = "rsvp";
-              db.saveDoc(doc, {
-                error : error,
-                success : function() {
-                  $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");
-                }
-              });
-            }
+        var subdomain = $("input[name=subdomain]").val();
+        
+        // first check to see about the subdomain availablity
+        db.openDoc("Server/"+subdomain, {
+          success : function() {
+            error({"reason":"The subdomain "+subdomain+" is already taken."});
           },
-          error : error
-        })
+          error : function() {
+            db.openDoc(id, {
+              success : function(doc) {
+                if (subdomain == "mycouch") {
+                  $("#flash").text("You need to set the subdomain first.")
+                } else {
+                  doc.subdomain = subdomain;
+                  doc.signup_email = $("input[name=email]").val();
+                  doc.state = "rsvp";
+                  db.saveDoc(doc, {
+                    error : error,
+                    success : function() {
+                      $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");
+                    }
+                  });
+                }
+              },
+              error : error
+            });
+          }
+        });
         return false;
       });
     });

@@ -39,7 +39,6 @@ The deploy bot can then go in and do a bunch of stuff (with whatever state trans
 ## TODO
 
 create new host
-  UNIQUE CHECK on subdomain
 
 install initial couchapps
 
