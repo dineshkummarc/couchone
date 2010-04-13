@@ -38,6 +38,8 @@ The deploy bot can then go in and do a bunch of stuff (with whatever state trans
 
 ## TODO
 
+Should this app run in the `hosting` database or run in the `couchone` database? It doesn't matter the app. Whatever subdomain it runs on, it will control via rewrites.
+
 create new host
 
 install initial couchapps
