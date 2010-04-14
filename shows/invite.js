@@ -4,7 +4,7 @@ function(doc, req) {
   if (doc) {
     doc.header = {}; // for partials
     doc.footer = {};
-    if (doc.state == "open") {
+    if (doc.state == "open" || doc.state == "unsent") {
       doc.email_length = (doc.invite_email && doc.invite_email.length) || 30;
       return mustache.to_html(ddoc.templates.invite, doc, ddoc.templates.partials);    
     } else if (doc.state == "ready") {
