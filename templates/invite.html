@@ -38,16 +38,17 @@
       $("form").submit(function() {
         var form = this;
         var id = document.location.href.split("/").pop();
-        var db = $.couch.db("couchone");
+        var invites_db = $.couch.db("invites");
+        var servers_db = $.couch.db("hosting");
         var subdomain = $("input[name=subdomain]").val();
         
         // first check to see about the subdomain availablity
-        db.openDoc("Server/"+subdomain, {
+        servers_db.openDoc("Server/"+subdomain, {
           success : function() {
             error({"reason":"The subdomain "+subdomain+" is already taken."});
           },
           error : function() {
-            db.openDoc(id, {
+            invites_db.openDoc(id, {
               success : function(doc) {
                 if (subdomain == "mycouch") {
                   $("#flash").text("You need to set the subdomain first.")
@@ -55,7 +56,7 @@
                   doc.subdomain = subdomain;
                   doc.signup_email = $("input[name=email]").val();
                   doc.state = "rsvp";
-                  db.saveDoc(doc, {
+                  invites_db.saveDoc(doc, {
                     error : error,
                     success : function() {
                       $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");

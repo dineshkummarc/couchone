@@ -24,7 +24,9 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   function newInvite(doc) {
     request.request("http://localhost:5984/invites/"+codes.pop(), 'PUT', JSON.stringify(doc),
       null, null, null, function(er, response) {
+        // warning, this code never runs due to node bug
         sys.puts(JSON.stringify(arguments));
+        // todo retry save in case of error
       });
   };
   
