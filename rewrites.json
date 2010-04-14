@@ -28,7 +28,18 @@
     "to": "_show/invite/:code"
   },
   {
-    "from": "/*",
-    "to": "../../../*"
+    "from": "invites/:id",
+    "to": "_update/docs/:id",
+    "method" : "PUT",
+    "about" : "this protects from non-document reads on the invites database"
+  },
+  {
+    "from": "invites/:id",
+    "to": "_show/docs/:id",
+    "about" : "this protects from non-document reads on the invites database"
+  },
+  {
+    "from": "_utils/*",
+    "to": "../../../_utils/*"
   }
 ]

@@ -24,4 +24,4 @@ function(newDoc, oldDoc, userCtx) {
   }
 };
 
-
+// deploy can move the invite to "ready" when the server is up
