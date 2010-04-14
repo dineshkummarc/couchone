@@ -41,5 +41,12 @@
   {
     "from": "_utils/*",
     "to": "../../../_utils/*"
+  },
+  {
+    "from": "subdomains/:name",
+    "to": "../../../hosting/_design/hosting/_view/subdomains",
+    "query" : {
+      "key" : [":name"]
+    }
   }
 ]
