@@ -41,9 +41,10 @@
       
       $("form").submit(function() {
         var form = this;
-        var db = $.couch.db("couchone");
+        var db = $.couch.db("invites");
 
         db.saveDoc({
+          _id : $.couch.newUUID(),
           type : "invite",
           state : "request",
           invite_email : $("input[name=email]").val(),

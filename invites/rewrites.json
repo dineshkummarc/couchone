@@ -43,6 +43,10 @@
     "to": "../../../_utils/*"
   },
   {
+    "from": "_uuids",
+    "to": "../../../_uuids"
+  },
+  {
     "from": "subdomains/:name",
     "to": "../../../hosting/_design/hosting/_view/subdomains",
     "query" : {
