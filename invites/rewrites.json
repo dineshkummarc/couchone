@@ -39,6 +39,12 @@
     "about" : "this protects from non-document reads on the invites database"
   },
   {
+    "from": "invites/",
+    "to": "../../../invites/",
+    "method": "POST",
+    "about" : "Allow POSTing new invite requests"
+  },
+  {
     "from": "_utils/*",
     "to": "../../../_utils/*"
   },
