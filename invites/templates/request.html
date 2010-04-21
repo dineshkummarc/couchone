@@ -41,7 +41,7 @@
       
       $("form").submit(function() {
         var form = this;
-        var db = $.couch.db("couchone");
+        var db = $.couch.db("invites");
 
         db.saveDoc({
           type : "invite",
