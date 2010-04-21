@@ -6,11 +6,11 @@ Hello and welcome to the Readme! This app is used by Couchio for invite code req
 
 To install, couchapp push this to a database, and then configure CouchDB to have a vhost like:
 
-    local.couchone.com:5984 = /couchone/_design/couchone/_rewrite
+    local.couchone.com:5984 = /invites/_design/invites/_rewrite
 
 Or probably actually more like:
 
-    api.couchone.com = /couchone/_design/couchone/_rewrite
+    api.couchone.com = /invites/_design/invites/_rewrite
 
 This app can coexist with the couchone api server just fine (as long as no one needs databases on it called any of: style, images, vendor, invite.) That's right, don't install it in a db called "invite."
 
