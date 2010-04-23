@@ -30,11 +30,11 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
       });
   };
   
-  csv.each(path.join(__dirname, "emails.csv"), {sep:','}).addListener("data", function(data) {
+  csv.each(path.join(__dirname, "roundone.csv"), {sep:','}).addListener("data", function(data) {
     if (data[0].indexOf("@") != -1) {
      var doc = {
        invite_email : data[0],
-       state : "unsent"
+       state : "open"
      };
      newInvite(doc);
     }

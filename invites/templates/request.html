@@ -44,6 +44,7 @@
         var db = $.couch.db("invites");
 
         db.saveDoc({
+          _id : $.couch.newUUID(),
           type : "invite",
           state : "request",
           invite_email : $("input[name=email]").val(),

@@ -62,6 +62,9 @@
                       error : error,
                       success : function() {
                         $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");
+                        setTimeout(function() {
+                          history.go(0);
+                        }, 5000);
                       }
                     });
                   }
