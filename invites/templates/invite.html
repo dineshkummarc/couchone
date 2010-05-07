@@ -4,9 +4,9 @@
       <form>
         <p>Dear Couchios,</p>
         <p>
-          Please set up an <a href="http://couchdb.apache.org">Apache CouchDB</a> server for me, hosted at the address 
-          <tt><input class="init" type="text" name="subdomain" value="mycouch">.couchone.com</tt>. 
-          To contact me about my service, please email 
+          Please set up an <a href="http://couchdb.apache.org">Apache CouchDB</a> server for me, hosted at the address
+          <tt><input class="init" type="text" name="subdomain" value="mycouch">.couchone.com</tt>.
+          To contact me about my service, please email
           <input type="text" name="email" value="{{invite_email}}" size="{{email_length}}">.
         </p>
         <p>
@@ -26,10 +26,10 @@
         if (resp.reason) {
           $("#flash").text("Error: "+resp.reason);
         } else {
-          $("#flash").text("Oops, something went wrong. We are terribly sorry! Please contact hosting@couch.io with details.");         
+          $("#flash").text("Oops, something went wrong. We are terribly sorry! Please contact hosting@couch.io with details.");
         }
       };
-      
+
       $("input.init").click(function() {
         var input = $(this);
         input.val("");
