@@ -35,44 +35,50 @@
         input.val("");
         input.removeClass("init");
       });
-      $("form").submit(function() {
-        var form = this;
-        var id = document.location.href.split("/").pop();
-        var invites_db = $.couch.db("invites");
-        var servers_db = $.couch.db("subdomains");
+
+      $("form").submit(function(ev) {
         var subdomain = $("input[name=subdomain]").val();
-        
-        // first check to see about the subdomain availablity
-        
-        servers_db.openDoc(subdomain, {
-           // take that, API!
-          success : function(view) {
-            if (view.rows.length > 0) {
-              error({"reason":"The subdomain "+subdomain+" is already taken."});
-            } else {
-              invites_db.openDoc(id, {
-                success : function(doc) {
-                  if (subdomain == "mycouch") {
-                    $("#flash").text("You need to set the subdomain first.");
-                  } else {
-                    doc.subdomain = subdomain;
-                    doc.signup_email = $("input[name=email]").val();
-                    doc.state = "rsvp";
-                    invites_db.saveDoc(doc, {
-                      error : error,
-                      success : function() {
-                        $(form).html("Your Couch is under contruction. When it is ready, you will receive an email with a link to your couch.");
-                      }
-                    });
-                  }
-                },
-                error : error
-              });
-            }
-          },
-          error : error
-        });
-        return false;
+        if (subdomain == "mycouch" || subdomain == "") {
+          ev.preventDefault();
+          $("#flash").text("Please enter a subdomain first.");
+        } else {
+          var form = this;
+          var id = document.location.href.split("/").pop();
+          var invites_db = $.couch.db("invites");
+          var servers_db = $.couch.db("subdomains");
+
+          // first check to see about the subdomain availablity
+
+          servers_db.openDoc(subdomain, {
+             // take that, API!
+            success : function(view) {
+              if (view.rows.length > 0) {
+                error({"reason":"The subdomain "+subdomain+" is already taken."});
+              } else {
+                invites_db.openDoc(id, {
+                  success : function(doc) {
+                    if (subdomain == "mycouch" || subdomain == "") {
+                      $("#flash").text("You need to set the subdomain first.");
+                    } else {
+                      doc.subdomain = subdomain;
+                      doc.signup_email = $("input[name=email]").val();
+                      doc.state = "rsvp";
+                      invites_db.saveDoc(doc, {
+                        error : error,
+                        success : function() {
+                          $(form).html("Your Couch is under contruction. When it is ready, you will receive an email with a link to your couch.");
+                        }
+                      });
+                    }
+                  },
+                  error : error
+                });
+              }
+            },
+            error : error
+          });
+          return false;
+        }
       });
     });
   </script>
