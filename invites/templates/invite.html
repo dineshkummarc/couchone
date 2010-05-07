@@ -61,10 +61,7 @@
                     invites_db.saveDoc(doc, {
                       error : error,
                       success : function() {
-                        $(form).html("Your Couch is under contruction. You will be redirected to it in a moment.");
-                        setTimeout(function() {
-                          history.go(0);
-                        }, 5000);
+                        $(form).html("Your Couch is under contruction. When it is ready, you will receive an email with a link to your couch.");
                       }
                     });
                   }
