@@ -8,6 +8,10 @@
     "to": "style/*"
   },
   {
+    "from": "yui/*",
+    "to": "yui/*"
+  },
+  {
     "from": "images/*",
     "to": "images/*"
   },
