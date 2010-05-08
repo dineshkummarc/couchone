@@ -321,3 +321,5 @@ var Mustache = function() {
     }
   });
 }();
+
+exports.to_html = Mustache.to_html;
