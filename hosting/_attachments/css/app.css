@@ -6,6 +6,10 @@ body {
   background-color: white;
 }
 
+#doc #ft {
+  margin-top: 0.2em;
+}
+
 #doc #hd h1 {
   font-weight: bold;
   font-size: 125%;
