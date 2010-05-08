@@ -12,12 +12,12 @@
     "to": "vendor/*"
   },
   {
-    "from": "/",
-    "to": "_show/ui"
-  },
-  {
     "about": "Everything else goes through /db and feels like the normal DB API",
     "from": "/db/*",
     "to": "../../*"
+  },
+  {
+    "from": "/*",
+    "to": "_show/ui/*"
   }
 ]
