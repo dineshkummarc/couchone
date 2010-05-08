@@ -4,7 +4,7 @@ function(doc, req) {
       partials = ddoc.templates.partials;
 
   var context = {main: doc || {}};
-  context.page = req.id || 'index';
+  context.page = req.id || 'home';
   context.title = context.page.charAt(0).toUpperCase() + context.page.slice(1);
   partials.main = ddoc.templates[context.page];
 
