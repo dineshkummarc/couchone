@@ -13,6 +13,6 @@
   },
   {
     "from": "/",
-    "to": "_show/hosting"
+    "to": "_show/ui"
   }
 ]
