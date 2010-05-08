@@ -15,6 +15,20 @@ body {
   font-size: 125%;
 }
 
-#doc #bd > .yui-b {
-  border-right: 2px dashed #ccc;
+#doc > #bd > .yui-b {
+  /* Sidebar */
+}
+
+#doc > #bd > #yui-main > .yui-b {
+  border-left: 2px dashed #ccc;
+  padding-left: 0.5em;
+}
+
+#doc #flash.flash {
+  border: 2px solid black;
+  font-weight: bold;
+  text-size: 125%;
+  margin: 0.5em;
+  padding: 1em;
+  background-color: #d66;
 }
