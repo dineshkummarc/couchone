@@ -1,7 +1,16 @@
 body {
-  background-color: #bedded;
+  background-color: #dcc;
 }
 
 #doc {
   background-color: white;
+}
+
+#doc #hd h1 {
+  font-weight: bold;
+  font-size: 125%;
+}
+
+#doc #bd > .yui-b {
+  border-right: 2px dashed #ccc;
 }
