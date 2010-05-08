@@ -4,6 +4,11 @@
     "to": "images/favicon.ico"
   },
   {
+    "about": "Enable fetching code directly from futon. Don't look at me, I learned this from Chris.",
+    "from": "_utils/*",
+    "to": "../../../_utils/*"
+  },
+  {
     "from": "a/*",
     "to": "/*"
   },
