@@ -4,16 +4,8 @@
     "to": "images/favicon.ico"
   },
   {
-    "from": "style/*",
-    "to": "style/*"
-  },
-  {
-    "from": "yui/*",
-    "to": "yui/*"
-  },
-  {
-    "from": "images/*",
-    "to": "images/*"
+    "from": "a/*",
+    "to": "/*"
   },
   {
     "from": "vendor/*",
