@@ -1,4 +1,10 @@
 /*
+ * CommonJS-compatible mustache.js module
+ *
+ * See http://github.com/janl/mustache.js for more info.
+ */
+
+/*
   mustache.js — Logic-less templates in JavaScript
 
   See http://mustache.github.com/ for more info.
@@ -157,7 +163,7 @@ var Mustache = function() {
          lines[i] = lines[i].replace(regex, function(match, operator, name) {
            switch(operator) {
              case "!": // ignore comments
-               return match;
+               return "";
              case "=": // set new delimiters, rebuild the replace regexp
                that.set_delimiters(name);
                regex = new_regex();
@@ -322,4 +328,9 @@ var Mustache = function() {
   });
 }();
 
-exports.to_html = Mustache.to_html;
+exports.name = Mustache.name;
+exports.version = Mustache.version;
+
+exports.to_html = function() {
+  return Mustache.to_html.apply(this, arguments);
+};
