@@ -1,25 +1,9 @@
 $(document).ready(function() {
-  var error = function(resp) {
-    $('#flash').text(resp.reason
-      ? 'Error: ' + resp.reason
-      : "Something went wrong. Please tell Jason if it is a big deal.").addClass('flash');
-  };
-
   var hosting = $.couch.db('db');
-  hosting.view('hosting/servers_by_account', {error:error,
+  hosting.view('hosting/servers_by_account', {error:lib.flash_error,
     success: function(view) {
-      // Add a pretty date formatter to the scope.
-      view._stamp = function(text, render) {
-         var mil_re = /(\.\d\d\d)$/;
-         var stamp = new Date(this.updated_at.replace(mil_re, ' +0000').replace(/-/g, '/'));
-         return stamp.toGMTString().replace(/ GMT$/, this.updated_at.match(mil_re)[1]); // Put the milliseconds back
-      };
-
-      var cls = 'even';
-      view._class = function(text, render) {
-        cls = (cls == 'even') ? 'odd' : 'even';
-        return cls;
-      };
+      view._class = lib.odd_even;
+      view._stamp = function() { return lib.format_ts(this.updated_at); };
 
       $('table#servers tbody').html($($.mustache([
         '{{#rows}}',
