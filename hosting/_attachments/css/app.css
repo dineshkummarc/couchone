@@ -13,13 +13,17 @@ body {
 #doc #hd h1 {
   font-weight: bold;
   font-size: 125%;
+  margin-bottom: 0.25em;
 }
 
 #doc > #bd > .yui-b {
   /* Sidebar */
+  width: 6.923em; /* 90 px */
 }
 
 #doc > #bd > #yui-main > .yui-b {
+  /* Main panel */
+  margin-left: 7.923em; /* 90px + 1em */
   border-left: 2px dashed #ccc;
   padding-left: 0.5em;
 }
