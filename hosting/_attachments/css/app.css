@@ -27,8 +27,14 @@ body {
 #doc #flash.flash {
   border: 2px solid black;
   font-weight: bold;
-  text-size: 125%;
+  font-size: 125%;
   margin: 0.5em;
   padding: 1em;
   background-color: #d66;
+}
+
+#main h2 {
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  font-size: 125%;
 }
