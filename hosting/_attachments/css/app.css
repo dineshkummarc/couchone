@@ -43,6 +43,7 @@ body {
   font-size: 125%;
 }
 
+#main table.invites,
 #main table.servers {
   border-collapse:collapse;
   font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
@@ -50,16 +51,19 @@ body {
   width: 100%;
 }
 
+#main table.invites th,
 #main table.servers th {
   color:#003399;
   font-size:14px;
   font-weight:normal;
 }
 
+#main table.invites td,
 #main table.servers td {
   color:#666699;
 }
 
+#main table.invites .odd,
 #main table.servers .odd {
   background:none repeat scroll 0 0 #E8EDFF;
 }
