@@ -22,5 +22,10 @@ var lib = {
     };
   }(),
 
+  mustache: function(context) {
+    var lines = Array.prototype.slice.apply(arguments, [1]);
+    return $($.mustache(lines.join("\n"), context));
+  },
+
   _: undefined
 };
