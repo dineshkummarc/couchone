@@ -1,22 +1,35 @@
 {{>header}}
       <div id="flash"></div>
-      <p>To become a hosting beta-tester, fill out this form to request an invite code. We'll release more invite codes as capacity becomes available.</p>
-      <form>
-        <p>Dear Couchios,</p>
-        <p>
-          I'd like to try your hosted <a href="http://couchdb.apache.org">Apache CouchDB</a> service! Please email 
-          an invite code to me at
-          <input class="init" type="text" name="email" value="mymail@example.com">. 
-        </p>
-        <p>          
-          I'd also like to leave an (optional) message:
-          <textarea name="message" rows="6" cols="40"></textarea>
-        </p>
-        <p>
-          <input type="submit" value="Thanks!">
-        </p>
-      </form>
-
+      <p class="lead">To become a hosting beta-tester, fill out this form to request an invite code. <br />
+        We’ll release more invite codes as capacity becomes available.</p>
+      <div class="span-6">
+        <form class="main">
+          <h3 class="pretty"><span>Sign up for Hosting</span></h3>
+          
+          <p>Dear Couchios,</p>
+          <p>
+            I’d like to try your hosted <a href="http://couchdb.apache.org">Apache CouchDB</a> service! <br />
+            Please email an invite code to me at <br />
+            <input class="init" type="text" name="email" value="mymail@example.com" />
+          </p>
+          <p>          
+            <label>I’d also like to leave an (optional) message:</label>
+            <textarea name="message" rows="6" cols="40"></textarea>
+          </p>
+          <p class="pretty_last">
+            <input type="submit" value="Thanks!" class="btn">
+          </p>
+        </form>
+      </div>
+      
+      <div class="span-6 last">
+        <div class="main">
+          <h3 class="pretty"><span>Join our Forums</span></h3>
+          <p class="pretty_last">We strongly encourage you to join <a href="http://forums.couch.io">the Couchio forums</a>. There, Couchio engineers and users like yourself will be discussing the hosting platform. We are very interested in hearing your opinions and other feedback about how Couchio hosting can be improved to serve you best.
+          </p>
+        </div>
+      </div>
+      
       {{>footer}}
 
   </body>
@@ -52,7 +65,7 @@
         }, {
           error : error,
           success : function() {
-            $(form).html("Your invite request has been recieved and will be processed as soon as possible. Thank you!");
+            $(form).html('<h3 class="pretty"><span>Thank You</h3><p class="pretty_last">Your invite request has been received and will be processed as soon as possible. Thank you!</p>');
           }
         });
 

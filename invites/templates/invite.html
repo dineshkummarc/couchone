@@ -1,20 +1,33 @@
 {{>header}}
       <div id="flash"></div>
-      <p>To become a hosting beta-tester, fill out this form, and you'll be directed to your very own instance of <a href="http://couchdb.apache.org">Apache CouchDB</a>.</p>
-      <form>
-        <p>Dear Couchios,</p>
-        <p>
-          Please set up an <a href="http://couchdb.apache.org">Apache CouchDB</a> server for me, hosted at the address
-          <tt><input class="init" type="text" name="subdomain" value="mycouch">.couchone.com</tt>.
-          To contact me about my service, please email
-          <input type="text" name="email" value="{{invite_email}}" size="{{email_length}}">.
-        </p>
-        <p>
-          <input type="submit" value="Thank you.">
-        </p>
-      </form>
+      <p class="lead">To become test a hosting beta-tester, fill out this form, and you'll be directed to your very own instance of <a href="http://couchdb.apache.org">Apache CouchDB</a>.</p>
+      <div class="span-6">
+        <form class="main">
+          <h3 class="pretty"><span>Choose your Address</span></h3>
+          <p>Dear Couchios,</p>
+          <p>
+            Please set up an <a href="http://couchdb.apache.org">Apache CouchDB</a> server for me, hosted at the address<br />
+            <tt><input class="init" type="text" name="subdomain" value="mycouch" />.couchone.com</tt>.
+          </p>
+          <p>
+            To contact me about my service, please email<br />
+            <input type="text" name="email" value="{{invite_email}}" size="{{email_length}}" />.
+          </p>
+          <p class="pretty_last">
+            <input type="submit" value="Thank you" class="btn" />
+          </p>
+        </form>
+      </div>
 
-      {{>footer}}
+      <div class="span-6 last">
+        <div class="main">
+          <h3 class="pretty"><span>Join our Forums</span></h3>
+          <p class="pretty_last">We strongly encourage you to join <a href="http://forums.couch.io">the Couchio forums</a>. There, Couchio engineers and users like yourself will be discussing the hosting platform. We are very interested in hearing your opinions and other feedback about how Couchio hosting can be improved to serve you best.
+          </p>
+        </div>
+      </div>
+      
+    {{>footer}}
 
   </body>
   <script src="/_utils/script/json2.js"></script>
