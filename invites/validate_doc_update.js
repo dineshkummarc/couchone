@@ -16,7 +16,7 @@ function(newDoc, oldDoc, userCtx) {
       if (userCtx.roles.indexOf("deploy") == -1 && userCtx.roles.indexOf("_admin") == -1) {
         // anyone can create a request
         if (newDoc.state != "request") {
-          throw({forbidden : "This is not a valid invite request!"})
+          throw({forbidden : "This is not a valid invite request! (Did you forget to log in?)"})
         }
       }
     }
