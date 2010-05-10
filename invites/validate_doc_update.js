@@ -13,7 +13,7 @@ function(newDoc, oldDoc, userCtx) {
         }
       }
     } else {
-      if (userCtx.roles.indexOf("deploy") == -1) {
+      if (userCtx.roles.indexOf("deploy") == -1 && userCtx.roles.indexOf("_admin") == -1) {
         // anyone can create a request
         if (newDoc.state != "request") {
           throw({forbidden : "This is not a valid invite request!"})
