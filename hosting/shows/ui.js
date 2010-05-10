@@ -3,6 +3,15 @@ function(doc, req) {
       mustache = require("vendor/couchapp/lib/mustache"),
       partials = ddoc.templates.partials;
 
+  log(req.userCtx);
+  if(req.userCtx.roles.indexOf('_admin') == -1 && req.userCtx.roles.indexOf('deploy') == -1) {
+    partials.main = ddoc.templates.login;
+    partials.sidebar = " ";
+    return mustache.to_html(ddoc.templates.interface,
+                           {hd:{}, main:{}, sidebar:{}, ft:{}},
+                           partials);
+  }
+
   var context = {main: doc || {}};
   context.page = req.id || 'home';
   context.title = context.page.charAt(0).toUpperCase() + context.page.slice(1);

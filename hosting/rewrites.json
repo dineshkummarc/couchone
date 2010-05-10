@@ -9,6 +9,14 @@
     "to": "../../../_utils/*"
   },
   {
+    "from": "_uuids",
+    "to": "../../../_uuids"
+  },
+  {
+    "from": "_session",
+    "to": "../../../_session"
+  },
+  {
     "about": "Allow a way to get to the invites DB",
     "from": "invites_db/*",
     "to": "../../../invites/*"
