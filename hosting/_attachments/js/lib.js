@@ -6,6 +6,10 @@ var lib = {
       : "Something went wrong. Please tell Jason if it is a big deal.").addClass('flash');
   },
 
+  flash: function(message) {
+    $('#flash').text(message).addClass('flash_message');
+  },
+
   // Convert the timestamp format used in the DB to a Javascript date.
   format_ts: function(stamp) {
     var mil_re = /(\.\d\d\d)$/;
