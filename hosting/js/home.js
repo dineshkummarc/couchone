@@ -5,7 +5,7 @@ $(document).ready(function() {
       view._class = lib.odd_even;
       view._stamp = function() { return lib.format_ts(this.updated_at); };
 
-      $('table#servers tbody').html($($.mustache([
+      $('table#servers tbody').html(lib.mustache(view,
         '{{#rows}}',
           '<tr class="{{_class}}">',
             '<td>{{key}}</td>',
@@ -16,8 +16,7 @@ $(document).ready(function() {
               '<td>{{port}}</td>',
             '{{/value}}',
           '<tr>',
-        '{{/rows}}',
-      ].join('\n'), view)));
+        '{{/rows}}'));
     }
   });
 });
