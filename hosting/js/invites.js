@@ -35,4 +35,41 @@ $(document).ready(function() {
     do_view($(this).val());
   });
   $('#select_view').change();
+
+  $('#new_invite').submit(function(ev) {
+    ev.preventDefault();
+    var emails = {
+      inviter: $('#new_invite input[name=inv_inviter]').val(),
+      invitee: $('#new_invite input[name=inv_invitee]').val()
+    };
+
+    if(emails.inviter == '@couch.io' || emails.invitee == '') {
+      lib.flash_error({reason:"You did not complete the form correctly. Try again."});
+      return;
+    }
+
+    var done = false;
+    for (var a in [1, 2, 3]) {
+      if(done) return;
+
+      var doc = {
+        _id : $.couch.newUUID(),
+        type : "invite",
+        state : "open", // Already approved.
+        email_sent: true, // They will go out in bulk so just wait for them.
+        suggested_by : emails.inviter,
+        invite_email : emails.invitee,
+        user_message : $.mustache("This invite was created by {{inviter}} for {{invitee}}", emails)
+      };
+
+      invites.saveDoc(doc, {
+        error: lib.flash_error,
+        success: function () {
+          done = true;
+          lib.flash("Invitation sent!");
+          $('#select_view').change();
+        }
+      });
+    }
+  });
 });

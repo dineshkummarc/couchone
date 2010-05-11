@@ -1,4 +1,4 @@
-<h2>Hosting Invitations</h2>
+<h2 class="first">Hosting Invitations</h2>
 
 Show:
 <select id="select_view">
@@ -18,3 +18,25 @@ Show:
   <tbody>
   </tbody>
 </table>
+
+<h2>Invite a Friend</h2>
+<form id="new_invite" method="GET">
+  <div class="input_group">
+    <label for="inv_inviter">Your address</strong></label>
+    <br>
+    <input type="text" name="inv_inviter" value="@couch.io"/>
+  </div>
+
+  <div class="input_group">
+    <label for="inv_email">Their address</label>
+    <br>
+    <input type="text" name="inv_invitee"/>
+  </div>
+
+  <div class="input_group" style="margin: 0">
+    <br>
+    <input type="submit" value="Go">
+  </div>
+
+  <div style="clear: both;"></div>
+</form>

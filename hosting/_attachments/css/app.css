@@ -37,10 +37,19 @@ body {
   background-color: #d66;
 }
 
+#main strong {
+  font-weight: bold;
+}
+
 #main h2 {
+  margin-top: 0.5em;
   font-weight: bold;
   border-bottom: 1px solid black;
   font-size: 125%;
+}
+
+#main h2.first {
+  margin-top: 0;
 }
 
 #main table.invites,
@@ -66,4 +75,9 @@ body {
 #main table.invites .odd,
 #main table.servers .odd {
   background:none repeat scroll 0 0 #E8EDFF;
+}
+
+#main form#new_invite .input_group {
+  float: left;
+  margin-right: 1em;
 }
