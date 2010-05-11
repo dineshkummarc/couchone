@@ -1,6 +1,14 @@
 function(doc, req) {
   var ddoc = this;
   var mustache = require("vendor/couchapp/lib/mustache");
+
+  if(req.id === null) {
+    // For now we redirect to the signup page that dumps into salesforce.com.
+    return {"code": 302,
+            "headers": {"Location": "http://www.couch.io/hosting"},
+            "body": "Redirecting to signup page" };
+  }
+
   if (doc) {
     doc.header = {}; // for partials
     doc.footer = {};
