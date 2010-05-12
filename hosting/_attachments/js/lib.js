@@ -39,7 +39,7 @@ var lib = new (function() {
 
   var noop = function() {};
   ['trace', 'dir', 'log', 'debug', 'info', 'warn', 'error', 'exception'].forEach(function(x) {
-    self[x] = (console && console[x]) ? console[x] : noop;
+    self[x] = (("console" in window) && ("firebug" in console)) ? console[x] : noop;
   });
 
 })();
