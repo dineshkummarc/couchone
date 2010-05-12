@@ -1,4 +1,5 @@
 var lib = new (function() {
+  var self = this;
 
   this.flash_error = function(resp) {
     $('#flash').text(resp.reason
@@ -28,5 +29,10 @@ var lib = new (function() {
     var lines = Array.prototype.slice.apply(arguments, [1]);
     return $($.mustache(lines.join("\n"), context));
   };
+
+  var noop = function() {};
+  ['trace', 'dir', 'log', 'debug', 'info', 'warn', 'error', 'exception'].forEach(function(x) {
+    self[x] = (console && console[x]) ? console[x] : noop;
+  });
 
 })();
