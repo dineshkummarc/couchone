@@ -48,9 +48,12 @@ $(document).ready(function() {
       return;
     }
 
-    var done = false;
-    for (var a in [1, 2, 3]) {
-      if(done) return;
+    var send = function send (trial, result) {
+      lib.debug('Send trial %d with %o', trial, result);
+      if(trial > 3) {
+        lib.flash_error(result);
+        return;
+      }
 
       var doc = {
         _id : $.couch.newUUID(),
@@ -63,13 +66,14 @@ $(document).ready(function() {
       };
 
       invites.saveDoc(doc, {
-        error: lib.flash_error,
+        error: function(st, er, reason) { send(trial+1, {status:st, error:er, reason:reason}); },
         success: function () {
           done = true;
           lib.flash("Invitation sent!");
           $('#select_view').change();
         }
       });
-    }
+    };
+    send(1);
   });
 });
