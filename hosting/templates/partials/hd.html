@@ -1,1 +1,12 @@
-<h1>Couchio Hosting Management</h1>
+<div style="float:left">
+  <h1>Couchio Hosting Management</h1>
+</div>
+<div style="float:right">
+  <form action="_session" method="DELETE" id="logout">
+    {{#userCtx}}
+    {{name}}
+    {{/userCtx}}
+    <input type="submit" value="Logout"/>
+  </form>
+</div>
+<div style="clear:both"></div>
