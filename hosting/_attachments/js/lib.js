@@ -2,13 +2,20 @@ var lib = new (function() {
   var self = this;
 
   this.flash_error = function(resp) {
-    $('#flash').text(resp.reason
-      ? 'Error: ' + resp.reason
-      : "Something went wrong. Please tell Jason if it is a big deal.").addClass('flash');
+    self.error('%o', resp);
+    $('#flash').removeClass('none')
+               .removeClass('flash_message')
+               .addClass('flash_error')
+               .text(resp.reason
+                 ? 'Error: ' + resp.reason
+                 : "Something went wrong. Please tell Jason if it is a big deal.");
   };
 
   this.flash = function(message) {
-    $('#flash').text(message).addClass('flash_message');
+    $('#flash').removeClass('none')
+               .removeClass('flash_error')
+               .addClass('flash_message')
+               .text(message);
   };
 
   // Convert the timestamp format used in the DB to a Javascript date.

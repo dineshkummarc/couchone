@@ -28,13 +28,24 @@ body {
   padding-left: 0.5em;
 }
 
-#doc #flash.flash {
+#doc #flash {
   border: 2px solid black;
   font-weight: bold;
   font-size: 125%;
   margin: 0.5em;
   padding: 1em;
+}
+
+#doc #flash.none {
+  display: none;
+}
+
+#doc #flash.flash_error {
   background-color: #d66;
+}
+
+#doc #flash.flash_message {
+  background-color: #6d6;
 }
 
 #main strong {
