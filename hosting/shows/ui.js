@@ -3,7 +3,6 @@ function(doc, req) {
       mustache = require("vendor/couchapp/lib/mustache"),
       partials = ddoc.templates.partials;
 
-  log(req.userCtx);
   if(req.userCtx.roles.indexOf('_admin') == -1 && req.userCtx.roles.indexOf('deploy') == -1) {
     partials.main = ddoc.templates.login;
     partials.sidebar = " ";
