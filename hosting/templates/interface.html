@@ -21,17 +21,10 @@
 </div>
 </body>
 
-<script src="vendor/couchapp/loader.js"></script>
-<script type="text/javascript" charset="utf-8">
-  var opts = {db:'db', design:'hosting'};
-  $.couch.app(function(app) {
-    $("#account").evently("account", app);
-    $("#profile").evently("profile", app);
-    $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
-    $("#items").evently("items", app);
-  }, opts);
-</script>
-
+<script src="/_utils/script/json2.js"></script>
+<script src="/_utils/script/jquery.js"></script>
+<script src="/_utils/script/jquery.couch.js"></script>
+<script src="/a/js/jquery.mustache.js"></script>
 <script src="/a/js/lib.js"></script>
 <script>{{{js}}}</script>
 
