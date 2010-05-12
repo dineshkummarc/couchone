@@ -1,11 +1,11 @@
 function(doc, req) {
   var ddoc = this,
-      mustache = require("vendor/couchapp/lib/mustache"),
+      mustache = require("vendor/mustache/mustache"),
+      util     = require('js/lib/util'),
       partials = ddoc.templates.partials;
 
   if(req.userCtx.roles.indexOf('_admin') == -1 && req.userCtx.roles.indexOf('deploy') == -1) {
     partials.main = ddoc.templates.login;
-    partials.sidebar = " ";
     return mustache.to_html(ddoc.templates.interface,
                            {hd:{}, main:{}, sidebar:{}, ft:{}},
                            partials);
@@ -13,6 +13,7 @@ function(doc, req) {
 
   var context = {main: doc || {}};
   context.page = req.id || 'home';
+  context.userCtx = req.userCtx;
   context.title = context.page.charAt(0).toUpperCase() + context.page.slice(1);
   context.js = ddoc.js[context.page];
 
