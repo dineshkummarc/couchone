@@ -1,15 +1,16 @@
 // this is a simple importer for the existing set of invites
 
-var host = 'localhost:5985';
-var DB = 'http://coadmin:n60Tj)59.89[@'+host+'/invites';
-
 var csv = require('./lib/csv'),
     request = require("./lib/request"),
     sys = require('sys'),
     fs = require("fs"),
+    url = require('url'),
     path = require('path'),
     http = require('http');
 
+var host = 'localhost:5985';
+var DB = 'http://coadmin:n60Tj)59.89[@'+host+'/invites';
+sys.puts("URL: " + sys.inspect(url.parse(DB)));
 
 fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   var words = JSON.parse(stuff),
@@ -25,10 +26,11 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   codes = codes.sort(function() {return Math.random() - 0.5});
   
   function newInvite(doc) {
+    sys.puts('Sending: ' + JSON.stringify(doc));
     request.request(DB+"/"+codes.pop(), 'PUT', JSON.stringify(doc),
       null, null, null, function(er, response) {
         if(er) throw new Error(er);
-        sys.puts(JSON.stringify(doc));
+        sys.puts(JSON.stringify({response:response, doc:doc._id}));
       });
   };
   
