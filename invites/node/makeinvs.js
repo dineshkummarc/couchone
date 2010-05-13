@@ -32,18 +32,23 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
       });
   };
   
-  /* buggy
-  if(process.env.dry)
-    sys.puts('{docs: [');
-  */
+  var lines = csv.each(path.join(__dirname, process.env.csv || "roundtwo.csv"));
 
-  var lines = csv.each(path.join(__dirname, "roundtwo.csv"));
+  if(process.env.dry)
+    sys.puts('{ "docs": [');
+  lines.addListener('end', function() {
+    sys.puts(']}');
+  });
+
   lines.addListener("data", function(data) {
-    if (data[0].indexOf("@") != -1) {
+    if (data[2].indexOf("@") == -1) {
+      if(process.env.verbose)
+        sys.puts("Error: " + sys.inspect(data));
+    } else {
      var doc = {
        type: "invite",
-       invite_email : data[0],
-       inviter: data[1],
+       invite_email : data[2],
+       inviter: 'alpha',
        email_sent: true,
        state : "open"
      };
@@ -56,13 +61,6 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
      }
     }
   });
-
-  /* buggy
-  lines.addListener('end', function() {
-    sys.puts('  {}');
-    sys.puts(']}');
-  });
-  */
 
 });
 
