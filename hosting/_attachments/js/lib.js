@@ -6,7 +6,7 @@ var lib = new (function() {
     $('#flash').removeClass('none')
                .removeClass('flash_message')
                .addClass('flash_error')
-               .text(resp.reason
+               .html(resp.reason
                  ? 'Error: ' + resp.reason
                  : "Something went wrong. Please tell Jason if it is a big deal.");
   };
@@ -15,7 +15,7 @@ var lib = new (function() {
     $('#flash').removeClass('none')
                .removeClass('flash_error')
                .addClass('flash_message')
-               .text(message);
+               .html(message);
   };
 
   // Convert the timestamp format used in the DB to a Javascript date.
