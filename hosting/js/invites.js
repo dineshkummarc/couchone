@@ -69,7 +69,7 @@ $(document).ready(function() {
         error: function(st, er, reason) { send(trial+1, {status:st, error:er, reason:reason}); },
         success: function () {
           done = true;
-          lib.flash("Invitation sent!");
+          lib.flash($.mustache('Invitation sent! <a href="{{url}}">See it here</a>.', {url:lib.invite_url(doc)}));
           $('#select_view').change();
         }
       });

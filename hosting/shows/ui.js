@@ -4,6 +4,8 @@ function(doc, req) {
       util     = require('js/lib/util'),
       partials = ddoc.templates.partials;
 
+  log(doc);
+  util.dir(req);
   if(req.userCtx.roles.indexOf('_admin') == -1 && req.userCtx.roles.indexOf('deploy') == -1) {
     partials.main = ddoc.templates.login;
     return mustache.to_html(ddoc.templates.interface,

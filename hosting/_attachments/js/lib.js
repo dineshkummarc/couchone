@@ -42,4 +42,12 @@ var lib = new (function() {
     self[x] = (("console" in window) && ("firebug" in console)) ? console[x] : noop;
   });
 
+  //
+  // Invites stuff
+  //
+
+  self.invite_url = function(invite) {
+    // XXX right here
+  };
+
 })();
