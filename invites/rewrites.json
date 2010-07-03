@@ -45,6 +45,12 @@
     "about" : "Allow POSTing new invite requests"
   },
   {
+    "from": "hosting/",
+    "to": "../../../hosting/_design/hosting/_update/docs/",
+    "method": "POST",
+    "about" : "Send directly to the hosting app update handler"
+  },
+  {
     "from": "_utils/*",
     "to": "../../../_utils/*"
   },
