@@ -17,20 +17,24 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
       codes = [];
   words.forEach(function(w) {
     words.forEach(function(w2) {
-      if (w != w2) {
-        var wx = (w+"-"+w2).replace(" ","-").toLowerCase();
-        codes.push(wx);
-      }
+      words.forEach(function(w3) {
+        if (w != w2 && w2 != w3) {
+          var wx = (w+"-"+w2+"-"+w3).replace(" ","-").toLowerCase();
+          codes.push(wx);
+        }
+      })
     });
   });
   codes = codes.sort(function() {return Math.random() - 0.5});
   
-  function newInvite(doc) {
+  function newInvite(doc, data) {
     sys.puts('Sending: ' + JSON.stringify(doc));
     request.request(DB+"/"+codes.pop(), 'PUT', JSON.stringify(doc),
-      null, null, null, function(er, response) {
+      null, null, null, function(er, connection, response) {
         if(er) throw new Error(er);
-        sys.puts(JSON.stringify({response:response, doc:doc._id}));
+        sys.puts("Response: " + response);
+        response = JSON.parse(response);
+        sys.puts(data.join(',') + 'http://hosting.couch.io/invite/' + response.id);
       });
   };
   
@@ -43,14 +47,14 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   });
 
   lines.addListener("data", function(data) {
-    if (data[2].indexOf("@") == -1) {
+    if (data[1].indexOf("@") == -1) {
       if(process.env.verbose)
         sys.puts("Error: " + sys.inspect(data));
     } else {
      var doc = {
        type: "invite",
-       invite_email : data[2],
-       inviter: 'alpha',
+       invite_email : data[1],
+       inviter: 'beta',
        email_sent: true,
        state : "open"
      };
@@ -59,7 +63,7 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
        doc._id = codes.pop();
        sys.puts('  ' + JSON.stringify(doc) + ',');
      } else {
-       newInvite(doc);
+       newInvite(doc, data);
      }
     }
   });
