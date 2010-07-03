@@ -34,7 +34,7 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
         if(er) throw new Error(er);
         sys.puts("Response: " + response);
         response = JSON.parse(response);
-        sys.puts(data.join(',') + 'http://hosting.couch.io/invite/' + response.id);
+        sys.puts(data.join(',') + ',http://hosting.couch.io/invite/' + response.id);
       });
   };
   
