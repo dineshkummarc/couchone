@@ -22,7 +22,14 @@ function(doc, req) {
         args[pair[0]] = pair[1];
       })
       newDoc = {"_id": "Server/"+args.subdomain, "creation": args};
-      return [newDoc, {json: {id: newDoc._id}}];
+      var url = "http://" + args.subdomain + '.couchone.com/_utils/';
+      return [newDoc,
+              {"code": 302,
+               "headers": {"Location": url,
+                           "Content-Type": "text/html"
+                          },
+               "body": this.templates.bounce.replace(/{{subdomain}}/g, args.subdomain)
+              }];
     }
   }
 };
