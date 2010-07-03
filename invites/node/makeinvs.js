@@ -2,6 +2,7 @@
 
 var csv = require('./lib/csv'),
     request = require("./lib/request"),
+    couchdb = require("../../../dependencies/node-couchdb/lib/couchdb")
     sys = require('sys'),
     fs = require("fs"),
     url = require('url'),
@@ -11,6 +12,13 @@ var csv = require('./lib/csv'),
 var host = 'localhost:5985';
 var DB = 'http://coadmin:n60Tj)59.89[@'+host+'/invites';
 sys.puts("URL: " + sys.inspect(url.parse(DB)));
+
+process.addListener('uncaughtException', function(er) {
+  sys.puts("Uncaught exception:\n" + er.stack || er);
+});
+
+var client = couchdb.createClient(5985, 'localhost', 'coadmin', 'n60Tj)59.89[');
+var invites_db = client.db('invites');
 
 fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   var words = JSON.parse(stuff),
@@ -27,14 +35,31 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
   });
   codes = codes.sort(function() {return Math.random() - 0.5});
   
-  function newInvite(doc, data) {
+  var invite_queue = [];
+
+  function process_invite() {
+    sys.puts("Queue length: " + invite_queue.length);
+    var invite = invite_queue.pop();
+    if(!invite) {
+      sys.puts("Done.");
+      return;
+    }
+
+    var doc = invite[0];
+    var data = invite[1];
+
     sys.puts('Sending: ' + JSON.stringify(doc));
-    request.request(DB+"/"+codes.pop(), 'PUT', JSON.stringify(doc),
-      null, null, null, function(er, connection, response) {
-        if(er) throw new Error(er);
-        sys.puts("Response: " + response);
-        response = JSON.parse(response);
+    doc._id = codes.pop();
+    invites_db.saveDoc(doc, function(er, response) {
+        //sys.puts("Response: " + response);
+        if(er) {
+          sys.puts("ERROR: " + response);
+          throw new Error(er);
+        }
+        //response = JSON.parse(response);
         sys.puts(data.join(',') + ',http://hosting.couch.io/invite/' + response.id);
+        setTimeout(process_invite, 100);
+        //process_invite();
       });
   };
   
@@ -44,6 +69,13 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
     sys.puts('{ "docs": [');
   lines.addListener('end', function() {
     sys.puts(']}');
+  });
+
+  lines.addListener('end', function() {
+    if(!process.env.dry) {
+      sys.puts("Processing " + invite_queue.length + " people");
+      process_invite();
+    }
   });
 
   lines.addListener("data", function(data) {
@@ -63,7 +95,7 @@ fs.readFile(path.join(__dirname, "invite-codes.txt"), function(err, stuff) {
        doc._id = codes.pop();
        sys.puts('  ' + JSON.stringify(doc) + ',');
      } else {
-       newInvite(doc, data);
+      invite_queue.push([doc, data]);
      }
     }
   });
