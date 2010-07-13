@@ -30,3 +30,22 @@ exports.dir = function(obj) {
     log(lines[a]);
   log('}');
 };
+
+exports.typeOf = function(value) {
+  var s = typeof value;
+  if (s === 'object') {
+    if (value) {
+      if (value instanceof Array) {
+        s = 'array';
+      }
+    } else {
+      s = 'null';
+    }
+  }
+  return s;
+}
+
+// Return whether the parameter is actually an associative array.
+exports.is_hash = function(obj) {
+  return exports.typeOf(obj) == 'object';
+}
