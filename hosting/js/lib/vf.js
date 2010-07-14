@@ -15,7 +15,7 @@ exports.is_manager = function(doc, id) {
 // Return whether a server doc is interesting to the given manager.
 exports.server_interesting_to_manager = function(doc, manager_id) {
   if(doc._id && doc._id.match(/^Server\//)) {
-    if(doc.state == 'request start')
+    if(doc.state === undefined || doc.state == 'request start')
       // Everybody should see this
       return true;
     if(doc.manager == manager_id)
