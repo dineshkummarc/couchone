@@ -4,22 +4,10 @@
     "to": "images/favicon.ico"
   },
   {
-    "about": "Enable fetching code directly from futon. Don't look at me, I learned this from Chris.",
-    "from": "_utils/*",
-    "to": "../../../_utils/*"
-  },
-  {
-    "from": "_uuids",
-    "to": "../../../_uuids"
-  },
-  {
-    "from": "_session",
-    "to": "../../../_session"
-  },
-  {
-    "about": "Allow a way to get to the invites DB",
-    "from": "invites_db/*",
-    "to": "../../../invites/*"
+    "from": "hosting/",
+    "to": "_update/docs/",
+    "method": "POST",
+    "about" : "Send directly to the hosting app update handler"
   },
   {
     "from": "a/*",
@@ -28,11 +16,6 @@
   {
     "from": "vendor/*",
     "to": "vendor/*"
-  },
-  {
-    "about": "Everything else goes through /db and feels like the normal DB API",
-    "from": "/db/*",
-    "to": "../../*"
   },
   {
     "from": "/*",
