@@ -9,6 +9,9 @@
     "method": "POST",
     "about" : "Send directly to the hosting app update handler"
   },
+  { "from": "invite/*",
+    "to"  : "_show/bounce/*"
+  },
   {
     "from": "a/*",
     "to": "/*"
