@@ -12,9 +12,14 @@ exports.is_manager = function(doc, id) {
   return match && (id === undefined || match[1] == id);
 }
 
+// Return whether a document represents a server.
+exports.is_server = function(doc) {
+  return doc._id && doc._id.match(/^Server\//);
+}
+
 // Return whether a server doc is interesting to the given manager.
 exports.server_interesting_to_manager = function(doc, manager_id) {
-  if(doc._id && doc._id.match(/^Server\//)) {
+  if(exports.is_server(doc)) {
     if(doc.state === undefined || doc.state == 'request start')
       // Everybody should see this
       return true;
