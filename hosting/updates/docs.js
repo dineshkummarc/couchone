@@ -23,6 +23,12 @@ function(doc, req) {
       })
       newDoc = {"_id": "Server/"+args.subdomain, "creation": args};
       var url = "http://" + args.subdomain + '.couchone.com/_utils/';
+
+      if(args.test) {
+        log("Testing only. Ignoring: " + JSON.stringify(newDoc));
+        newDoc = null;
+      }
+
       return [newDoc,
               {"code": 302,
                "headers": {"Location": url,
