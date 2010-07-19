@@ -1,4 +1,6 @@
 function(doc, req) {
+  var ddoc = this;
+
   if (req.method == "GET") {
     return [null, {
       headers : {
@@ -29,12 +31,16 @@ function(doc, req) {
         newDoc = null;
       }
 
+      var mustache = require('vendor/mustache/mustache');
+      var values = {};
+      values.subdomain = args.subdomain;
+
       return [newDoc,
               {"code": 302,
                "headers": {"Location": url,
                            "Content-Type": "text/html"
                           },
-               "body": this.templates.bounce.replace(/{{subdomain}}/g, args.subdomain)
+               "body": mustache.to_html(ddoc.templates.bounce, values)
               }];
     }
   }
