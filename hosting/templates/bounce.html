@@ -143,7 +143,6 @@
   <!-- end footer -->
   <script src="/_utils/script/jquery.js" type="text/javascript" charset="utf-8"></script>
   <script src="/_utils/script/jquery.couch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/_utils/script/json2.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
   var args = {{{args}}};
 
@@ -161,7 +160,7 @@
     },
     error: function(status, error, reason) {
      // on fail: redirect back to submit form
-      window.location.href = "http://betalocal.couch.io:5984/get?{{{raw}}}&domaininuse=" + args.subdomain;
+      window.location.href = "http://www.couch.io/get?{{{raw}}}&domaininuse=" + args.subdomain;
     }
   });
   </script>
