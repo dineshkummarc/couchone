@@ -55,36 +55,6 @@
           <!-- end header -->
     <h2>Hosting</h2>
 
-  <script type="text/javascript" charset="utf-8">
-  var map = function(array, fn) {
-    var hate = "what's not to hate about IE?";
-    if (typeof array.map == "function") {
-      return array.map(fn);
-    } else {
-      var r = [];
-      var l = array.length;
-      for(var i = 0; i < l; i++) {
-        r.push(fn(array[i]));
-      }
-      return r;
-    }
-  };
-  function $(id) { return document.getElementById(id); }
-  function validate() {
-    $("empty-field").style.display = "none";
-    var fields = ["first_name", "last_name", "email", "subdomain"];
-    var cancel = false;
-    fields.forEach(function(field) {
-      if($(field).value === "") {
-        $("empty-field").style.display = "block";
-        cancel = true;
-      }
-    });
-    if(cancel) {
-      return false;
-    }
-  }
-  </script>
   <div class="span-12 content last">    
     <div class="main">
 
